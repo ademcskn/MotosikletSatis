@@ -1,0 +1,17 @@
+﻿@{ 
+    var db = new MVCeTicaret.Models.Context();
+}
+@{
+    if (Session["OnlineKullanici"] == null)
+    {
+        <li>@Html.ActionLink("Üye Ol", "Register", "Login")</li>
+        <li>@Html.ActionLink("Giriş Yap", "Login", "Login")</li>
+    }
+    else
+    {
+        <li><a href="@Url.Action("Cart","Shopping")">Sepetiniz <span class="badge">@db.OrderDetails.Where(x=>x.CustomerID==MVCeTicaret.Models.TemporaryUserData.UserID && x.IsCompleted ==false).ToList().Count()</span></a></li>
+        <li><a href="@Url.Action("Wishlist","Shopping")">İstek Listeniz <span class="badge">@db.Wishlists.Where(x => x.CustomerID == MVCeTicaret.Models.TemporaryUserData.UserID && x.IsActive == true).ToList().Count()</span></a></li>
+        <li>@Html.ActionLink(Session["OnlineKullanici"].ToString(), "UpdateProfile", "Profile")</li>
+        <li>@Html.ActionLink("Çıkış Yap", "Logout", "Login")</li>
+    }
+}

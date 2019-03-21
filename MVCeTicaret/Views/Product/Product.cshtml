@@ -1,0 +1,28 @@
+﻿@model IEnumerable<MVCeTicaret.Models.Product>
+
+@{
+    ViewBag.Title = "Product";
+}
+
+<div class="container">
+    <div class="row" style="margin-top:50px">
+        @{
+            foreach (var item in Model)
+            {
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src="@Url.Content(item.ImageUrl)" alt="@Url.Content(item.AltText)" />
+                        <div class="caption">
+                            <h4 style="height:15px;text-align:center"><b>@item.Name</b></h4>
+                            <h5 style="text-align:center"> @string.Format("{0:C0}", item.UnitPrice)</h5>
+                            <hr />
+                            <p style="overflow:auto;text-align:center;">@item.ShortDescription</p>
+                            <p>@Html.ActionLink("Ürün Detayı", "ProductDetail", new { id = item.ProductID }, new { @class = "btn btn-info form-control" })</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+

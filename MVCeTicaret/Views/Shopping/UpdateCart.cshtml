@@ -1,0 +1,64 @@
+﻿@model IEnumerable<MVCeTicaret.Models.OrderDetail>
+@{
+    ViewBag.Title = "UpdateCart";
+}
+
+<h2>Sepetindekileri Güncelle</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Ürün Adı</th>
+            <th>Ürün Görseli</th>
+            <th>Sepetteki Miktar</th>
+            <th>Stok Miktarı</th>
+            <th>Sepetten Çıkar</th>
+            <th>İstek Lİstesine Ekle</th>
+            <th>Miktarı Otomatik Güncelle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Product.Name</td>
+                    <td>
+                        <img src="@Url.Content(item.Product.ImageUrl)" alt="@Url.Content(item.Product.AltText)" class="img-thumbnail" style="height:170px" />
+                    </td>
+                    <td>
+                        @item.Quantity @item.Product.QuantityPerUnit
+                    </td>
+                    <td>
+                        @{
+                            if (item.Quantity < item.Product.UnitInStock)
+                            {
+                                <span style="color:red;font-weight:bold;">@item.Product.UnitInStock @item.Product.QuantityPerUnit</span>
+                            }
+                            else
+                            {
+                                <span>@item.Product.UnitInStock @item.Product.QuantityPerUnit</span>
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<hr />
+
+@{
+    if (Model.ToList().Count == 0)
+    {
+        <span class="lead">
+            Sepetiniz Boş...
+        </span>
+    }
+    else
+    {
+        @Html.ActionLink("Siparişi Tamamla", "GotoPayment", "Shopping", null, new { @class = "btn btn-success", @style = "float:right" })
+    }
+}
+

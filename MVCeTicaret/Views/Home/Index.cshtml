@@ -1,0 +1,78 @@
+﻿@model IEnumerable<MVCeTicaret.Models.Product>
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+
+<div class="row" style="margin-top:50px">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#honda" aria-controls="honda" role="tab" data-toggle="tab">Honda Motosiklet</a>
+        </li>
+        <li role="presentation">
+            <a href="#yamaha" aria-controls="honda" role="tab" data-toggle="tab">Yamaha Motosiklet</a>
+        </li>
+        <li role="presentation">
+            <a href="#bmw" aria-controls="honda" role="tab" data-toggle="tab">BMW Motosiklet</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div id="honda" class="tab-pane fade in active">
+            @{
+                foreach (var item in TempData["Honda"] as IEnumerable<MVCeTicaret.Models.Product>)
+                {
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                            <img src="@Url.Content(item.ImageUrl)" alt="@Url.Content(item.AltText)" />
+                            <div class="caption">
+                                <h4 style="height:15px;text-align:center"><b>@item.Name</b></h4>
+                                <h5 style="text-align:center"> @string.Format("{0:C0}", item.UnitPrice)</h5>
+                                <hr />
+                                <p style="overflow:auto;text-align:center;">@item.ShortDescription</p>
+                                <p>@Html.ActionLink("Ürün Detayı", "ProductDetail", "Product", new { id = item.ProductID }, new { @class = "btn btn-info form-control" })</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <div id="yamaha" class="tab-pane fade">
+            @{
+                foreach (var item in TempData["Yamaha"] as IEnumerable<MVCeTicaret.Models.Product>)
+                {
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                            <img src="@Url.Content(item.ImageUrl)" alt="@Url.Content(item.AltText)" />
+                            <div class="caption">
+                                <h4 style="height:15px;text-align:center"><b>@item.Name</b></h4>
+                                <h5 style="text-align:center"> @string.Format("{0:C0}", item.UnitPrice)</h5>
+                                <hr />
+                                <p style="overflow:auto;text-align:center;">@item.ShortDescription</p>
+                                <p>@Html.ActionLink("Ürün Detayı", "ProductDetail", "Product", new { id = item.ProductID }, new { @class = "btn btn-info form-control" })</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <div id="bmw" class="tab-pane fade">
+            @{
+                foreach (var item in TempData["BMW"] as IEnumerable<MVCeTicaret.Models.Product>)
+                {
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                            <img src="@Url.Content(item.ImageUrl)" alt="@Url.Content(item.AltText)" />
+                            <div class="caption">
+                                <h4 style="height:15px;text-align:center"><b>@item.Name</b></h4>
+                                <h5 style="text-align:center"> @string.Format("{0:C0}", item.UnitPrice)</h5>
+                                <hr />
+                                <p style="overflow:auto;text-align:center;">@item.ShortDescription</p>
+                                <p>@Html.ActionLink("Ürün Detayı", "ProductDetail", new { id = item.ProductID }, new { @class = "btn btn-info form-control" })</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
