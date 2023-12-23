@@ -10,7 +10,7 @@ namespace MVCeTicaret.Models
     {
         public Context()
         {
-            Database.Connection.ConnectionString = @"server=ADEM-LENOVO\SQLEXPRESS;database=eTicaretDbYeni;uid=sa;pwd=123";
+            Database.Connection.ConnectionString = @"server=ADEMCOSKUN\SQLEXPRESS;database=eTicaretDbYeni;Trusted_Connection=True";
         }
 
         public DbSet<AdminEmployee> AdminEmployees { get; set; }
